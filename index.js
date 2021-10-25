@@ -22,7 +22,7 @@ try {
             "fallback": "",
             "text": message,
             "id": 1,
-            "color": process.env.color || "3AA3E3"
+            "color": core.getInput('color') || "3AA3E3"
             // "actions": [{
             //     "id": "1",
             //     "name": "winners_list",
