@@ -17,15 +17,29 @@ try {
         const message = core.getInput('slack-message');
         const channelId = core.getInput('channel-id');
         const web = new WebClient(botToken);
+        const attachments = [{
+            // "callback_id": "select_simple_1234",
+            "fallback": "",
+            "text": message,
+            "id": 1,
+            "color": process.env.color || "3AA3E3"
+            // "actions": [{
+            //     "id": "1",
+            //     "name": "winners_list",
+            //     "text": "Who should win?",
+            //     "type": "select",
+            //     "data_source": "users"
+            // }]
+        }];
 
         if(channelId.length > 0 && message.length > 0) {
             // post message
-            web.chat.postMessage({text: message, channel: channelId});
+            web.chat.postMessage({channel: channelId, attachments});
         } else {
             console.log('missing either channel-id or slack-message! Did not send a message via chat.postMessage with botToken');
         }
-    } 
-    
+    }
+
     if (typeof webhookUrl !== 'undefined' && webhookUrl.length > 0) {
 
         if (payload.length < 1) {
